@@ -11,7 +11,7 @@ Create a New branch of your own Name
 Pull the updated code from main branch
 ### `git pull origin main`
 
-Make necessary changes in the code
+Make necessary changes in the code  
 ***Note:*** Make sure that you are in your own branch before updating the code
 
 Update your changes to the Github Repository
