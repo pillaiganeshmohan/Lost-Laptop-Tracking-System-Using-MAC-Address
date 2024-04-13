@@ -4,3 +4,32 @@
   height: 100vh;
 }
 
+.splash {
+  position: absolute;
+  width: 10.1875rem; /* 163px */
+  height: 10.1875rem; /* 163px */
+  left: -3.9375rem; /* -63px */
+  top: 106.25rem; /* 1700px */
+  background: #8350df;
+  filter: blur(6.59375rem); /* 105.5px */
+}
+
+.splash2 {
+  position: absolute;
+  width: 13.8125rem; /* 221px */
+  height: 13.8125rem; /* 221px */
+  right: -7.5rem; /* -120px */
+  top: 77.8125rem; /* 1245px */
+  background: #8350df;
+  filter: blur(6.59375rem); /* 105.5px */
+}
+
+.splash3 {
+  position: absolute;
+  width: 13.8125rem; /* 221px */
+  height: 13.8125rem; /* 221px */
+  right: -7.5rem; /* -120px */
+  top: 134.375rem; /* 2150px */
+  background: #8350df;
+  filter: blur(6.59375rem); /* 105.5px */
+}
