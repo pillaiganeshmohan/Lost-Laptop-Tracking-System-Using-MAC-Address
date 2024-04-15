@@ -38,7 +38,7 @@ function Navbar() {
 
         @media (max-width: 600px) {
           .nav-links a {
-            font-size: 1rem; /* 16px */
+            font-size: 10px; /* 16px */
           }
         }
       `}</style>
