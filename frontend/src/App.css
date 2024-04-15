@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  /* width: 100%; */
+  /* width: max-content; */
   height: 100vh;
 }
 
@@ -34,9 +34,16 @@
   filter: blur(6.59375rem); /* 105.5px */
 }
 
-
 @media (max-width: 600px) {
   .App {
     width: min-content;
+  }
+  .tableContainer {
+    padding: 3.4375rem;
+  }
+
+  .tableCell {
+    font-size: 15px;
+    text-wrap: nowrap;
   }
 }

@@ -50,7 +50,7 @@ function DetailedView() {
         <h2 className="font-semibold text-[55px] tracking-tight text-white z-10">
           Detailed View
         </h2>
-        <div className="ps-[120px] d-flex flex-col items-center justify-center gap-10">
+        <div className="tableContainer ps-[120px] d-flex flex-col items-center justify-center gap-10">
           {data && (
             <table className="text-white text-[20px] mx-auto">
               <tbody>
@@ -63,8 +63,8 @@ function DetailedView() {
                     <td
                       className={`${
                         key === "Status"
-                          ? "ps-[100px] text-left text-green-500"
-                          : "ps-[100px] text-left"
+                          ? "ps-[100px] text-left text-green-500 tableCell"
+                          : "ps-[100px] text-left tableCell"
                       }`}
                     >
                       {value}
