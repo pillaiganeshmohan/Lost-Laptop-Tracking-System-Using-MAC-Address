@@ -56,7 +56,7 @@ function DetailedView() {
               <tbody>
                 {Object.entries(data).map(([key, value]) => (
                   <tr key={key} className="leading-[80px]">
-                    <td className="w-[200px] font-extrabold italic font-italic text-left">
+                    <td className="w-[200px] font-extrabold italic font-italic text-left font__key">
                       {key}
                       <span className="float-right">:</span>
                     </td>
@@ -79,7 +79,7 @@ function DetailedView() {
               Fetching Data | Error in Fetching Datra
             </h3>
           )}
-          <Link className="bg-button py-4 mt-4 px-10 text-xl text-white font-bold rounded-lg z-10">
+          <Link className="btn__back bg-button py-4 mt-10 px-10 text-xl text-white font-bold rounded-lg z-10 d-inline">
             Back
           </Link>
           <svg
