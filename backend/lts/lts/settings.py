@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tracker',
+    'search_algo',
     'corsheaders',
     'rest_framework',
 ]
@@ -141,3 +142,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'tracker.User'
 
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+# SMTP Settings for Gmail
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587  # For SSL
+EMAIL_HOST_USER = 'senderoflts@gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_HOST_PASSWORD = 'saakzbsogrjnbvcx'
+
+
+
+TWILIO_ACCOUNT_SID = 'AC9daa75f3747e078e7d3cfc5942048659'
+TWILIO_AUTH_TOKEN = '12462b71741ab86d300ac3f73420cd63'
+TWILIO_PHONE_NUMBER = '+12513134948'
