@@ -86,8 +86,7 @@ class SearchView(APIView):
     def post(self, request, *args, **kwargs):
         try:
             user_email = request.user.email 
-            # email = request.user.email  # Access the email of the current authenticated user
-            # print(email)
+           
             data = json.loads(request.body)
             id = data.get('id')
             mac_address = data.get('mac_address')
@@ -117,7 +116,6 @@ class SearchView(APIView):
                             "-e", "ip.src",
                         ]
 
-                        print("Executing tshark command:", " ".join(tshark_command))  # Debugging statement
 
                         tshark_process = subprocess.Popen(
                             tshark_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
@@ -132,14 +130,12 @@ class SearchView(APIView):
                             print(data)
                             lat = data.get('latitude', '')
                             lon = data.get('longitude', '')
-                            print("lat:",lat)
-                            print("lon:",lon)
+                            
 
                             res_location = requests.get(f'https://api.mapbox.com/search/geocode/v6/reverse?longitude={lon}&latitude={lat}&access_token={access_token}')
                             data = res_location.json()
                             location = data['features'][0]['properties']['full_address']
 
-                            print(location)
                             mac_address_found = True  # Set the flag to true
                             result = {
                                 "mac_address": mac_address,
@@ -166,7 +162,6 @@ class SearchView(APIView):
                                 stolen_laptop.status = True
                                 contact = stolen_laptop.contact_no
                                 stolen_laptop.save()
-                                print(contact)
                                
 
                                 client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
