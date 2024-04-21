@@ -14,7 +14,7 @@ import Footer from '../components/Footer'
 function Home() {
   return (
     <>
-        <div className='w-full flex flex-col items-center h-[90vh] justify-center gap-4'>
+        <div className='w-full flex flex-col items-center h-[90vh] justify-center gap-4 bg-black'>
         <img src={bg} className='z-0 absolute top-20 w-full h-[90vh] object-fill'/>
         <h1 className='font-semibold text-[64px] leading-[70px] tracking-tight text-white z-10'>Lost Laptop Tracking System<br/> Using MAC Address</h1>
         <label className='text-xl text-white z-10'>“Upgrade your Laptop’s Security to the Utopian Level with <br/> Lost Laptop Tracking System”</label>
@@ -23,12 +23,12 @@ function Home() {
     <div className='w-full flex h-[100vh] bg-black gap-3'>
     <img src={gradientLeft} className='absolute'/>
         <div className='w-1/2  flex-col items-center justify-center gap-6 flex'>
-            
+
             <h1 className='w-4/5 text-6xl text-left font-bold tracking-tight text-white'>One step solution<br/> for a complete<br/> protection of your<br/> device</h1>
             <label className='w-4/5 text-left text-xl tracking-tight text-white'>With some amazing features in hand, rest assured about the security of your personal information from the eyes of those malicious hackers. Our Lost Laptop Tracking System has been equipped with all that's necessary to keep your device fully secure, all at the comfort of your fingertips!</label>
         </div>
         <div className='w-1/2 flex items-center justify-start' >
-            
+
             <div className='w-11/12 items-start justify-start'>
             <img src={work} className=' object-fill w-full'/>
             </div>
@@ -88,13 +88,13 @@ function Home() {
                 <label className='text-lg text-white'>Details</label>
             </div>
         </div>
-        
+
     </div>
     </div>
 
     </div>
     <div className='w-full flex items-center h-[80vh] bg-black'>
-    <img src={gradientLeft} className='absolute'/>   
+    <img src={gradientLeft} className='absolute'/>
     <div className='flex w-full flex-col items-center '>
     <h1 className='mt-6 text-5xl text-center font-semibold text-white'>
     About Us
@@ -103,7 +103,7 @@ function Home() {
         <div className='flex flex-col gap-2'>
             <img src={ganesh} className='size-60 rounded-md'/>
             <label className='text-button text-left text-xl font-bold'>
-            Ganesh Mohan Pillai            
+            Ganesh Mohan Pillai
             </label>
             <label className='text-white text-left text-sm'>
             pillaiganeshmohanwork@gmail.com
@@ -112,7 +112,7 @@ function Home() {
         <div className='flex flex-col gap-2'>
             <img src={jannat} className='size-60 rounded-md'/>
             <label className='text-button text-left text-xl font-bold'>
-            Jannat Shaikh            
+            Jannat Shaikh
             </label>
             <label className='text-white text-left text-sm'>
             jannatshaikh@gmail.com
@@ -121,7 +121,7 @@ function Home() {
         <div className='flex flex-col gap-2'>
             <img src={member} className='size-60 rounded-md'/>
             <label className='text-button text-left text-xl font-bold'>
-            Priyanshi Sharma            
+            Priyanshi Sharma
             </label>
             <label className='text-white text-left text-sm'>
             priyanshi@gmail.com
@@ -130,13 +130,13 @@ function Home() {
         <div className='flex flex-col gap-2'>
             <img src={tejas} className='size-60 rounded-md'/>
             <label className='text-button text-left text-xl font-bold'>
-            Tejas Patil          
+            Tejas Patil
             </label>
             <label className='text-white text-left text-sm'>
             tejaspatil@gmail.com
             </label>
         </div>
-        
+
 
     </div>
     </div>
