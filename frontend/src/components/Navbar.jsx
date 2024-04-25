@@ -36,7 +36,7 @@ function Navbar() {
   return (
     <div className='w-full flex bg-black h-full z-50 justify-between'>
       <div className='w-1/6 flex items-center sm:justify-center'>
-        <img className='w-20 h-12 ml-12 sm:ml-6 flex' src={logo} alt="Logo"/>
+       <Link to='/'> <img className='w-20 h-12 ml-12 sm:ml-6 flex' src={logo} alt="Logo"/></Link>
       </div>
       <div className='w-3/6 items-center justify-end gap-12 sm:hidden flex'>
         {/* Desktop menu links */}
@@ -60,8 +60,8 @@ function Navbar() {
           <Link className='text-white text-lg mb-4' to='/contact/#1' onClick={toggleMobileMenu}>Contact Us</Link>
           {!isLoggedIn && (
           <>
-            <Link className='text-white text-lg mb-4' to='/slider' state={{ showSignUp: true }}>Login</Link>
-            <Link className='text-white text-lg mb-4' to='/slider' state={{ showSignUp: false }}>Sign Up</Link>
+            <Link className='text-white text-lg mb-4' to='/login-signup' state={{ showSignUp: true }}>Login</Link>
+            <Link className='text-white text-lg mb-4' to='/login-signup' state={{ showSignUp: false }}>Sign Up</Link>
           </>
         )}
         {isLoggedIn &&
@@ -73,15 +73,15 @@ function Navbar() {
       <div className='w-2/6 flex items-center justify-end gap-6 mr-14 sm:hidden '>
         {!isLoggedIn && (
           <>
-            <Link className='w-1/4 bg-button px-2 py-2 text-lg font-semibold text-white hover:bg-white hover:text-black rounded-md' to='/slider' state={{ showSignUp: true }}>Login</Link>
-            <Link className='w-1/4 bg-button px-2 py-2 text-lg font-semibold text-white hover:bg-white hover:text-black rounded-md' to='/slider' state={{ showSignUp: false }}>Sign Up</Link>
+            <Link className='w-1/4 bg-button px-2 py-2 text-lg font-semibold text-white hover:bg-white hover:text-black rounded-md' to='/login-signup' state={{ showSignUp: true }}>Login</Link>
+            <Link className='w-1/4 bg-button px-2 py-2 text-lg font-semibold text-white hover:bg-white hover:text-black rounded-md' to='/login-signup' state={{ showSignUp: false }}>Sign Up</Link>
           </>
         )}
 
         {isLoggedIn && 
         <>
         <label className='text-lg text-white font-semibold'>Welcome, {fullName}</label>
-         <Link onClick={handleLogout} className='w-1/4 bg-button px-2 py-2 text-lg font-semibold text-white hover:bg-white hover:text-black rounded-md' to='/slider' state={{ showSignUp: true }}>Logout</Link>
+         <Link onClick={handleLogout} className='w-1/4 bg-button px-2 py-2 text-lg font-semibold text-white hover:bg-white hover:text-black rounded-md' to='/login-signup' state={{ showSignUp: true }}>Logout</Link>
          </>}
       </div>
     </div>

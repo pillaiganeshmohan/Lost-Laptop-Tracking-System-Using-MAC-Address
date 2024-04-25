@@ -69,7 +69,7 @@ function DetailedView() {
     const userLoggedIn = localStorage.getItem('userData') !== null;
     setIsLoggedIn(userLoggedIn);
     if (!userLoggedIn) {
-      navigate('/slider', { state: { showSignUp: true } });
+      navigate('/login-signup', { state: { showSignUp: true } });
     }
   }, [navigate]);
 

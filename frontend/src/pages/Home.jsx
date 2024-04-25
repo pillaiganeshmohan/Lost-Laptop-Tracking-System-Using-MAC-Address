@@ -25,7 +25,7 @@ function Home() {
   
     const handleGetStarted = () => {
       if (!isLoggedIn) {
-        navigate('/slider', { state: { showSignUp: true } });
+        navigate('/login-signup', { state: { showSignUp: true } });
       }
       else{
         navigate('/registration')

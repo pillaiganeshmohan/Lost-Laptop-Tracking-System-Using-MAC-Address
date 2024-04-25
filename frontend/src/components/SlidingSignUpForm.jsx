@@ -3,6 +3,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from "react-toastify";
+import { Link } from 'react-router-dom';
 
 
 const SlidingSignUpForm = () => {
@@ -17,7 +18,9 @@ const SlidingSignUpForm = () => {
   const [aadhaarError, setAadhaarError] = useState('');
   const [contactError, setContactError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  
   const [allError, setAllError] = useState(false);
 
   const navigate = useNavigate()
@@ -31,7 +34,7 @@ const SlidingSignUpForm = () => {
 
     if (name === 'aadhaar_no') { 
       if (!/^\d{12}$/.test(value)) {
-        setAadhaarError('*Aadhaar must be 12 digits');
+        setAadhaarError('Aadhaar must be 12 digits');
       } else {
         setAadhaarError('');
       }
@@ -39,7 +42,7 @@ const SlidingSignUpForm = () => {
 
     if (name === 'contact_no') { 
       if (!/^\d{10}$/.test(value)) {
-        setContactError('*Contact must be 10 digits');
+        setContactError('Contact must be 10 digits');
       } else {
         setContactError('');
       }
@@ -47,29 +50,58 @@ const SlidingSignUpForm = () => {
 
     if (name === 'password') {
       if (value.length < 8) {
-        setPasswordError('*Password must be 8 characters');
+        setPasswordError('Password must be 8 characters');
       } else {
         setPasswordError('');
       }
     }
+    if (name === 'email') {
+      if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value)) {
+        console.log('email')
+        setEmailError('Email Incorrect');
+      } else {
+        setEmailError('');
+      }
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = axios.post('http://127.0.0.1:8000/api/users/register/', formData);
-      toast.success("Success Notification !", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-      console.log("Registered Successfully",formData);
-      
-    } catch (error) {
-      console.log(error);
-  
-    } 
- 
-  };
 
+    if (aadhaarError || contactError) {
+        toast.error("Please correct the errors before submitting.");
+        return;
+    }
+
+    try {
+        // Simulate a successful registration request with a success toast
+        const response = await axios.post('http://127.0.0.1:8000/api/users/register/', formData);
+
+        if(response)
+        {
+          toast.success('Registered Successfully', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+
+        console.log("Registered Successfully", formData);
+
+        const signUpState = { showSignUp: true };  
+        navigate('/login-signup', { state: signUpState });  
+        }
+        
+    } catch (error) {
+        console.log(error);
+        toast.error("Registration failed. Please try again.");
+    }
+};
+ 
   return (
     <div className="flex flex-col mt-2">
       <h1 className="flex text-2xl font-semibold mb-4 text-gray-700 justify-center sm:text-center sm:-ml-10">New to the System, <br/> Sign Up Now</h1>
@@ -101,9 +133,14 @@ const SlidingSignUpForm = () => {
           <hr className="border-b-gray-200 border-2 w-80 sm:w-[80vw]"/>
         </div>
         <div className="flex flex-col mb-4 w-full">
+        <div className="flex flex-row w-80 justify-between">
           <label htmlFor="address" className="mb-1 text-left text-sm text-gray-500 font-semibold">Email</label>
+          {emailError && <p className="text-red-500 text-xs">{emailError}</p>}
+        </div>  
           <input type="text" name="email" value={formData.email} onChange={handleInputChange} className="w-80 text-xs outline-none sm:w-[70vw]" placeholder="Enter Your Email" required/>
           <hr className="border-b-gray-200 border-2 w-80 sm:w-[80vw]"/>
+          
+
         </div>
         <div className="flex flex-col mb-4 w-full">
           <div className="flex flex-row w-80 justify-between">
@@ -128,8 +165,9 @@ const SlidingSignUpForm = () => {
               <label htmlFor="terms" className="text-xs w-44"><i>I accept Terms & Conditions</i></label>
             </div>
             <div className="flex items-right -mt-2 ml-8">
-            <button type="submit" onClick={handleSubmit} className={`${allError?'cursor-pointer':'cursor-not-allowed'} bg-gray-300 w-24 text-black py-2 font-semibold text-sm hover:bg-black hover:text-white`}
-              >Sign Up</button>
+            <Link to='/login-signup' state={{ showSignUp: false }} onClick={handleSubmit} className={`${allError?'cursor-pointer':'cursor-not-allowed'} bg-gray-300 w-24 text-black py-2 font-semibold text-sm hover:bg-black hover:text-white`}
+              >Sign Up
+              </Link>
             </div>
         </div>
       </form>

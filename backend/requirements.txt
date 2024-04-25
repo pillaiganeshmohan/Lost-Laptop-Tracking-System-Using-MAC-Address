@@ -1,0 +1,10 @@
+Django
+djangorestframework
+django-cors-headers
+twilio
+nest_asyncio
+asyncio
+djangorestframework-simplejwt
+pyshark
+ip2geotools
+geopy
