@@ -56,6 +56,11 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.email
 
+class ContactUs(models.Model):
+    full_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    contact_us = models.CharField(max_length=200)
+    query = models.TextField()
 
   # Import User model here
 

@@ -11,6 +11,11 @@ class StolenLaptopDetailsSerializer(serializers.ModelSerializer):
         model = StolenLaptopDetails
         fields = '__all__'
 
+class ContactUsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactUs
+        fields = '__all__'
+        
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         email = attrs.get('email')
