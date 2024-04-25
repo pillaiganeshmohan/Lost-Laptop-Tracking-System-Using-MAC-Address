@@ -75,18 +75,22 @@ class UserCreateAPIView(generics.CreateAPIView):
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
-
+session = requests.Session()
+session.headers.update({
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.1.2222.33 Safari/537.36",
+    "Accept-Encoding": "*",
+    "Connection": "keep-alive"
+})
 
 User = get_user_model()
 nest_asyncio.apply()  
 
-
 class SearchView(APIView):
     permission_classes = [IsAuthenticated]
+
     def post(self, request, *args, **kwargs):
         try:
             user_email = request.user.email 
-           
             data = json.loads(request.body)
             id = data.get('id')
             mac_address = data.get('mac_address')
@@ -94,11 +98,11 @@ class SearchView(APIView):
             if not id or not mac_address:
                 return JsonResponse({"error": "Both id and MAC address are required."}, status=400)
                 
-            path = "C:\Major Projct"  # Ensure this is the correct path
+            path = "C:\Major Projct"  
             mac_address_found = False
             result = {}
 
-            print("Searching for MAC address:", mac_address)  # Debugging statement
+            print("Searching for MAC address:", mac_address)  
 
             for root, dirs, files in os.walk(path):
                 if mac_address_found:
@@ -107,42 +111,48 @@ class SearchView(APIView):
                 for pcap_file in files:
                     if pcap_file.endswith(".pcap"):
                         filepath = os.path.join(root, pcap_file)
-                        print(f"Searching in file: {filepath}")  # Debugging statement
+                        print(f"Searching in file: {filepath}")  
+
                         tshark_command = [
-                            "C:\\Program Files\\Wireshark\\tshark.exe",  # Assuming 'tshark' is in the PATH
+                            "C:\\Program Files\\Wireshark\\tshark.exe",  
                             "-r", filepath,
                             "-Y", f"eth.src == {mac_address}",
                             "-T", "fields",
                             "-e", "ip.src",
                         ]
 
+                        print("Executing tshark command:", " ".join(tshark_command))  
 
                         tshark_process = subprocess.Popen(
                             tshark_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
                         )
 
                         for line in tshark_process.stdout:
-                            print("tshark output:", line.strip())  # Debugging statement
+                            print("tshark output:", line.strip())  
                             
                             ip_address = line.strip()
-                            res = requests.get(f'https://api.ipgeolocation.io/ipgeo?apiKey={API_KEY}&ip={ip_address}')
+                            
+                            res = session.get(f'https://api.ipgeolocation.io/ipgeo?apiKey={API_KEY}&ip={ip_address}')
                             data = res.json()
                             print(data)
                             lat = data.get('latitude', '')
                             lon = data.get('longitude', '')
-                            
+                            print("lat:",lat)
+                            print("lon:",lon)
 
-                            res_location = requests.get(f'https://api.mapbox.com/search/geocode/v6/reverse?longitude={lon}&latitude={lat}&access_token={access_token}')
+                            res_location = session.get(f'https://api.mapbox.com/search/geocode/v6/reverse?longitude={lon}&latitude={lat}&access_token={access_token}')
                             data = res_location.json()
                             location = data['features'][0]['properties']['full_address']
 
-                            mac_address_found = True  # Set the flag to true
+                            print(location)
+                            mac_address_found = True  
+
                             result = {
                                 "mac_address": mac_address,
                                 "ip_address": ip_address,
                                 "location": location
                             }
-                            
+                            print('Sending email')
                             
                             send_mail(
                                 'Laptop Found',
@@ -152,7 +162,7 @@ class SearchView(APIView):
                                 fail_silently=False,
                             )
 
-                            
+                            print('Saving Details to database')
                             # Save to StolenLaptopDetails model
                             try:
                                 stolen_laptop = StolenLaptopDetails.objects.get(id=id)
@@ -163,21 +173,30 @@ class SearchView(APIView):
                                 contact = stolen_laptop.contact_no
                                 stolen_laptop.save()
                                
+                                print('Sending SMS')
 
-                                client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
-                                message = client.messages.create(
-                                body=f'Your Laptop is found at {location}',
-                                from_=settings.TWILIO_PHONE_NUMBER,
-                                to=f'+91{contact}')
+                                message = session.post(
+                                    f'https://api.twilio.com/2010-04-01/Accounts/{settings.TWILIO_ACCOUNT_SID}/Messages.json',
+                                    data={
+                                        'Body': f'Your Laptop is found at {location}',
+                                        'From': settings.TWILIO_PHONE_NUMBER,
+                                        'To': f'+91{contact}'
+                                    },
+                                    auth=(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+                                )
+                                print(message.json())
+
+                                print('SMS Sent')
 
                             except StolenLaptopDetails.DoesNotExist:
                                 return JsonResponse({"error": "Invalid id."}, status=400)        
                             break
 
                         tshark_process.terminate()
+                        print('tshark terminated')
 
             if not mac_address_found:
-                print("MAC address not found")  # Debugging statement
+                print("MAC address not found")  
                 return JsonResponse({"error": "MAC address not found"}, status=404)
                 
             return JsonResponse(result)
