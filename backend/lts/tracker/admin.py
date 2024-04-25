@@ -20,7 +20,7 @@ class StolenLaptopDetailsAdmin(admin.ModelAdmin):
         'user', 'full_name', 'aadhaar_no', 'date', 'brand', 'model_no', 
         'mac_address', 'ipv4', 'location', 'status'
     )
-    search_fields = ('user__email', 'full_name', 'aadhaar_no', 'brand', 'model_no', 'mac_address', 'ipv4')
+    search_fields = ('user__email', 'full_name', 'aadhaar_no', 'brand', 'model_no', 'mac_address' )
     list_filter = ('date', 'brand', 'status')
 
     def get_queryset(self, request):

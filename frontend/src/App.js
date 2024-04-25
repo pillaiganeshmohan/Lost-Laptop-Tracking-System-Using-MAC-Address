@@ -7,16 +7,33 @@ import Registration from "./pages/Registration";
 import DetailedView from './pages/DetailedView';
 import Slider from "./pages/Slider";
 import React from "react";
+import ContactUs from "./pages/ContactUs";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
   return (
     <Router>
       <div className="App">
+      <ToastContainer
+    position="top-right"
+    autoClose={5000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    theme="light"    />
         <Routes>
           <Route path="/" element={<Layout><Home /></Layout>}/>
           <Route path="/registration" element={ <Layout><Registration /></Layout>}/>
-          <Route path="/details" element={<Layout><DetailedView/></Layout>} />
+          <Route path="/details/:id" element={<Layout><DetailedView/></Layout>} />
           <Route path="/slider" element={<Slider />} />
+          <Route path="/contact" element={<Layout><ContactUs /></Layout>} />
+
         </Routes>
       </div>
     </Router>

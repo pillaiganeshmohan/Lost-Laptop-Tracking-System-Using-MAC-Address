@@ -11,7 +11,6 @@ class StolenLaptopDetailsSerializer(serializers.ModelSerializer):
         model = StolenLaptopDetails
         fields = '__all__'
 
-
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         email = attrs.get('email')
@@ -35,11 +34,15 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         refresh = RefreshToken.for_user(user)
 
-        attrs['refresh'] = str(refresh)
-        attrs['access'] = str(refresh.access_token)
+        # Include full_name in the response
+        full_name = user.full_name if hasattr(user, 'full_name') else None
 
-        return attrs
-
+        return {
+            'email': email,
+            'full_name': full_name,
+            'access_token': str(refresh.access_token),
+            'refresh_token': str(refresh)
+        }
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:

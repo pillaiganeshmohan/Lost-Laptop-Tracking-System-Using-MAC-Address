@@ -7,7 +7,7 @@ function Layout({children}) {
         <div className='w-full h-[10vh] z-20'>
             <Navbar/>
         </div>
-        <div className='w-full h-[89vh]'>
+        <div className='w-full'>
             {children}
         </div>
     </div>

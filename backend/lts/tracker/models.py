@@ -32,7 +32,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     police_id = models.CharField(max_length=100, unique=True)
     aadhaar_no = models.CharField(max_length=100)
     contact_no = models.IntegerField(default=0)
-    address = models.CharField(max_length=100)
+    address = models.CharField(max_length=100, null=True)
     full_name = models.CharField(max_length=100)
     is_staff = models.BooleanField(default=False)
 
