@@ -6,6 +6,11 @@ from .models import *
 class UserAdmin(admin.ModelAdmin):
     list_display = ('email', 'police_id')
     search_fields = ('email', 'police_id')
+
+@admin.register(ContactUs)
+class UserAdmin(admin.ModelAdmin):
+    list_display = ('email', 'contact_us')
+    search_fields = ('email', 'contact_us')
    
 
 @admin.register(UserProfile)

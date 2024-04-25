@@ -205,3 +205,8 @@ class SearchView(APIView):
 
     def get(self, request, *args, **kwargs):
         return JsonResponse({"error": "Invalid HTTP method. Use POST."}, status=405)
+    
+
+class ContactUsListCreate(generics.ListCreateAPIView):
+    queryset = ContactUs.objects.all()
+    serializer_class = ContactUsSerializer

@@ -4,7 +4,7 @@ import gradientRight from '../assets/gradientRight.png';
 import Footer from '../components/Footer';
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from 'react-router-dom';
-
+import axios from 'axios';
 
 function ContactUs() {
   const [fullName, setFullName] = useState('');
@@ -42,21 +42,39 @@ function ContactUs() {
     return Object.keys(errors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
 
-      toast.success('Query Submitted Successfully!', {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    
+      
+      try{
+        const response = await axios.post('http://127.0.0.1:8000/api/contactus/', {full_name: fullName, email: email, contact_us: mobileNo, query: query});
+        toast.success('Query Submitted Successfully!', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+      catch (error) {
+        toast.error('Server Error!', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+
+      }
+      
+
       console.log('Form submitted successfully');
       navigate('/')
     }
@@ -65,9 +83,9 @@ function ContactUs() {
   return (
     <div id='1' className={`w-full flex items-center justify-center flex-col sm:justify-between sm:gap-4 bg-black`}>
       <img src={gradientLeft} className='absolute top-[50%] sm:w-1/2 sm:h-1/2 left-0 sm:top-[10%]' alt='Gradient Left' />
-      <img src={gradientRight} className='absolute top-[15%] z-50 right-0 sm:top-[45%]' alt='Gradient Right' />
+      <img src={gradientRight} className='sm:hidden absolute top-[15%] z-50 right-0 sm:top-[45%]' alt='Gradient Right' />
       <h1 className='z-20 my-10 text-5xl sm:text-4xl text-center font-semibold text-white'>Contact Us</h1>
-      <form onSubmit={handleSubmit} className='w-3/5 sm:w-full bg-black flex flex-col items-center justify-center'>
+      <form className='w-3/5 sm:w-full bg-black flex flex-col items-center justify-center'>
         <label className='text-white w-full text-left text-xl font-bold flex justify-between'>
         <label> Full Name </label>{errors.fullName && <span className='text-red-500 text-lg font-semibold'>{errors.fullName}</span>}</label>
         <input
@@ -104,7 +122,7 @@ function ContactUs() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         /> 
-        <button className='w-1/4 sm:w-1/2 bg-button py-4 my-8 px-10 text-xl text-white italic rounded-lg z-10' type='submit'>Submit</button>
+        <button className='w-1/4 sm:w-1/2 bg-button py-4 my-8 px-10 text-xl text-white italic rounded-lg z-10' type='submit' onClick={handleSubmit}>Submit</button>
       </form>
       <Footer />
     </div>
