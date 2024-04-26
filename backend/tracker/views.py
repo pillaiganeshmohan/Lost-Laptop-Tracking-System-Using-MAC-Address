@@ -114,7 +114,7 @@ class SearchView(APIView):
                         print(f"Searching in file: {filepath}")  
 
                         tshark_command = [
-                            "C:\\Program Files\\Wireshark\\tshark.exe",  
+                            rf"{settings.BASE_DIR}\pcap_files\Wireshark\tshark.exe",  
                             "-r", filepath,
                             "-Y", f"eth.src == {mac_address}",
                             "-T", "fields",
@@ -126,6 +126,8 @@ class SearchView(APIView):
                         tshark_process = subprocess.Popen(
                             tshark_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
                         )
+
+                        print("tshark_process:", " ",tshark_process)  
 
                         for line in tshark_process.stdout:
                             print("tshark output:", line.strip())  
