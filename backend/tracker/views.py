@@ -37,12 +37,12 @@ class StolenLaptopDetailsAPIView(APIView):
     def get(self, request):
         stolen_laptops = StolenLaptopDetails.objects.all()
         serializer = StolenLaptopDetailsSerializer(stolen_laptops, many=True)
+        print(f"path: {settings.BASE_DIR}")
         return Response(serializer.data)
 
     def post(self, request):
-        # Add user information to the request data
         request_data = request.data.copy()
-        request_data['user'] = request.user.id  # Assign the logged-in user's ID to the user field
+        request_data['user'] = request.user.id  
 
         serializer = StolenLaptopDetailsSerializer(data=request_data)
         if serializer.is_valid():
@@ -98,7 +98,7 @@ class SearchView(APIView):
             if not id or not mac_address:
                 return JsonResponse({"error": "Both id and MAC address are required."}, status=400)
                 
-            path = "C:\Major Projct"  
+            path = f"{settings.BASE_DIR}\pcap_files"  
             mac_address_found = False
             result = {}
 
