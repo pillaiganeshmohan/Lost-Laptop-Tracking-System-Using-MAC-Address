@@ -257,3 +257,4 @@ def upload_pcap_files(request):
         # Log the error for debugging purposes
         print(f"Error occurred during file upload: {str(e)}")
         return JsonResponse({'error': 'An error occurred during file upload'}, status=500)
+    

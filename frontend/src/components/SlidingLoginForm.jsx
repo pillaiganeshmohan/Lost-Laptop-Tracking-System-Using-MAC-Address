@@ -46,9 +46,10 @@ const SlidingLoginForm = () => {
       case 'password':
         if (!value.trim()) {
           error = 'Password is required';
-        } else if (value.length < 8) { 
-          error = 'Must be at least 8 characters .';
-        }
+        } 
+        // else if (value.length < 8) { 
+        //   error = 'Must be at least 8 characters .';
+        // }
         break;
       default:
         break;

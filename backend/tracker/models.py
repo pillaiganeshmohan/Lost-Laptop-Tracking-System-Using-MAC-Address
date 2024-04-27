@@ -45,8 +45,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
 class PcapFile(models.Model):
-    filename = models.CharField(max_length=255)
-    file = models.FileField(upload_to='pcap_files/')  # Path where the file is stored
+    name = models.CharField(max_length=255)
+    file = models.FileField()  # Path where the file is stored
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

@@ -145,7 +145,7 @@ function UserApproval({ myClass }) {
         </tbody>
       </table>
       
-      {filteredRecords.map((record, index) => (
+      {currentRecords.map((record, index) => (
        <> 
       <div key={index} className='w-11/12 flex-col hidden sm:flex'>
       

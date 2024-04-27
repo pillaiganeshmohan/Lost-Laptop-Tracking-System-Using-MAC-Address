@@ -148,8 +148,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'tracker.User'
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '5e02-182-48-229-164.ngrok-free.app']
 
+MEDIA_URL = '/pcap_files/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'pcap_files')
 
 SIMPLE_JWT = {
@@ -181,5 +182,5 @@ EMAIL_HOST_PASSWORD = 'saakzbsogrjnbvcx'
 
 
 TWILIO_ACCOUNT_SID = 'AC9daa75f3747e078e7d3cfc5942048659'
-TWILIO_AUTH_TOKEN = '148db4c7a485645e70ab7b7dbea2d338'
+TWILIO_AUTH_TOKEN = '14bbe2927809c1d6c33c987697197f15'
 TWILIO_PHONE_NUMBER = '+12513134948'
