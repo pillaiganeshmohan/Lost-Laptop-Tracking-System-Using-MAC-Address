@@ -108,7 +108,7 @@ function ContactUs() {
   };
 
   return (
-    <div className={`w-full flex items-center justify-center flex-col sm:justify-between sm:gap-4 bg-black`}>
+    <div id="1" className={`w-full flex items-center justify-center flex-col sm:justify-between sm:gap-4 bg-black`}>
       <img src={gradientLeft} className='absolute top-[50%] sm:w-1/2 sm:h-1/2 left-0 sm:top-[10%]' alt='Gradient Left' />
       <img src={gradientRight} className='sm:hidden absolute top-[15%] z-50 right-0 sm:top-[45%]' alt='Gradient Right' />
       <h1 className='z-20 my-10 text-5xl sm:text-4xl text-center font-semibold text-white'>Contact Us</h1>

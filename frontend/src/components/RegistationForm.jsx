@@ -266,7 +266,7 @@ function RegistationForm({myClass}) {
          value={formData.approximate_time}
          onChange={handleInputChange}
          className='bg-black w-full py-2 mb-4 text-white border-b-2 border-white  focus:outline-none'
-         placeholder='Enter Time'
+         placeholder='Enter Time in 24Hrs HH:MM format'
        />
        
        {isLoading && 

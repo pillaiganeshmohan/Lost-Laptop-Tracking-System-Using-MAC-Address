@@ -45,6 +45,7 @@ function DetailedView() {
         progress: undefined,
         theme: "light",
       });
+      window.location.reload()
       setIsLoading(false)
       console.log("Report Registered Successfully", response.data);
       setIsLoading(false)

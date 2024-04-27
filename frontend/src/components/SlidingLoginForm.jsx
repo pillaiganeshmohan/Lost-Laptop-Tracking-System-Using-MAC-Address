@@ -47,9 +47,9 @@ const SlidingLoginForm = () => {
         if (!value.trim()) {
           error = 'Password is required';
         } 
-        // else if (value.length < 8) { 
-        //   error = 'Must be at least 8 characters .';
-        // }
+        else if (value.length < 8) { 
+          error = 'Must be at least 8 characters';
+        }
         break;
       default:
         break;
@@ -114,18 +114,18 @@ const SlidingLoginForm = () => {
         <h1 className="flex text-2xl font-semibold mb-4 text-gray-700 justify-center sm:text-center sm:-ml-10">Welcome Back, <br/> Login Here</h1>
         <form className="sm:form flex flex-col w-full max-w-md justify-left -ml-2 items-left sm:-ml-6">
           <div className="flex flex-col mb-4 w-full">
-          <div className='w-full flex justify-between'>
+          <div className='w-80 flex justify-between'>
           <label htmlFor="email" className="mb-1 text-left text-sm text-gray-500 font-semibold">Email Id</label>
-          {errors.email && <span className="text-red-500 text-sm font-semibold">{errors.email}</span>}
+          {errors.email && <span className="text-red-500 text-sm">{errors.email}</span>}
           </div>
 
             <input type="text" name="email" value={formData.email} onChange={handleInputChange} className="w-80 text-xs outline-none sm:w-[70vw]" placeholder="Enter Your Email Id" required/>
             <hr className="border-b-gray-200 border-2 w-80 sm:w-[80vw]"/>
           </div>
           <div className="flex flex-col mb-4 w-full">
-            <div className='w-full flex justify-between'>
+            <div className='w-80 flex justify-between'>
             <label htmlFor="password" className="mb-1 text-left text-sm text-gray-500 font-semibold">Password</label>
-            {errors.password && <span className="text-red-500 text-sm font-semibold">{errors.password}</span>}
+            {errors.password && <span className="text-red-500 text-sm">{errors.password}</span>}
             </div>
             <div className="relative w-80 sm:w-[80vw] text-left">
               <input
