@@ -27,6 +27,8 @@ import json
 import subprocess
 import time
 import requests
+from django.shortcuts import get_object_or_404
+
 
 API_KEY = '99b41e1dfa0b482193afe53016477721'
 access_token = 'pk.eyJ1IjoiamFubmF0c2s0NCIsImEiOiJjbHY1ODdtbjUwMDd4Mm1vYnFtMndwc25kIn0.UJhfUVw-YPS6cPYoB7hXZQ'
@@ -212,3 +214,46 @@ class SearchView(APIView):
 class ContactUsListCreate(generics.ListCreateAPIView):
     queryset = ContactUs.objects.all()
     serializer_class = ContactUsSerializer
+
+
+
+class MakeSuperuserAPIView(APIView):
+    def post(self, request):
+        if not request.user.is_superuser:
+            return Response({"error": "Permission denied"}, status=status.HTTP_403_FORBIDDEN)
+        
+        email = request.data.get('email')
+
+        user = get_object_or_404(User, email=email)
+
+        user.is_superuser = True
+        user.is_staff = True
+        user.save()
+
+        return Response({"message": f"{email} is now an Admin"}, status=status.HTTP_200_OK)
+    
+@csrf_exempt
+def upload_pcap_files(request):
+    try:
+        if request.method == 'POST' and request.FILES.getlist('pcap_files'):
+            pcap_files = request.FILES.getlist('pcap_files')
+            uploaded_files = []
+            upload_dir = f'{settings.BASE_DIR}/pcap_files/'
+            os.makedirs(upload_dir, exist_ok=True)
+
+            for pcap_file in pcap_files:
+                file_path = os.path.join(upload_dir, pcap_file.name)
+                if os.path.exists(file_path):
+                    os.remove(file_path)
+                with open(file_path, 'wb+') as destination:
+                    for chunk in pcap_file.chunks():
+                        destination.write(chunk)
+                uploaded_files.append(pcap_file.name)
+
+            return JsonResponse({'uploaded_files': uploaded_files})
+        else:
+            return JsonResponse({'error': 'No files uploaded'}, status=400)
+    except Exception as e:
+        # Log the error for debugging purposes
+        print(f"Error occurred during file upload: {str(e)}")
+        return JsonResponse({'error': 'An error occurred during file upload'}, status=500)

@@ -28,7 +28,7 @@ const Slider = () => {
             </h1>
             <div className={`container ${isSignUp ? 'right-panel-active' : ''}`} id="main">
                 <div className="log-in" id="log-in">
-                    <form action="#" className="mt-3 sm:w-fit sm:-ml-60 sm:text-center">
+                    <form action="#" className="form mt-3 sm:w-fit sm:-ml-48 sm:text-center">
                         <Login />  {/* Include your Login form component */}
                         <div className="mt-2 text-center text-xs">
                             Need an account?
@@ -39,7 +39,7 @@ const Slider = () => {
                     </form>
                 </div>
                 <div className="sign-up" id="sign-up">
-                    <form action="#" className="mt-3 sm:w-fit sm:-ml-7 sm:text-center">
+                    <form action="#" className="form mt-3 sm:w-fit sm:-ml-7 sm:text-center">
                         <SignUp />  {/* Include your SignUp form component */}
                         <div className="mt-2 text-center text-xs sm:-ml-16 sm:mt-3">
                             Already have an Account?

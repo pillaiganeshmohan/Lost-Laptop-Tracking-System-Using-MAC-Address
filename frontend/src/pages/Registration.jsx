@@ -30,14 +30,14 @@ function Registration() {
         <img src={bg} className='z-0 absolute sm:hidden top-20 w-full h-[87vh] object-fill'/>
         <hl className='text-white font-semibold text-6xl sm:text-4xl z-20'>Track Your Laptop Now</hl>
         <div className='flex gap-16 sm:gap-10 sm:flex-col sm:items-center sm:justify-center sm:w-11/12'>
-          <Link onClick={() =>{
+          <Link to='#registration' onClick={() =>{
             setRegistrationButtonClicked(true)
             setExistingButtonClicked(false)
-          }} className='sm:w-[60%] bg-button py-4 mt-4 px-10 sm:px-4 text-xl sm:text-lg text-white italic rounded-lg z-10'>Register Now</Link>
-          <Link onClick={() =>{
+          }} className='sm:w-[60%] bg-button py-4 hover:bg-purple-950 hover:border-2 hover:border-button mt-4 px-10 sm:px-4 text-xl sm:text-lg text-white italic rounded-lg z-10'>Register Now</Link>
+          <Link to='#records' onClick={() =>{
             setRegistrationButtonClicked(false)
             setExistingButtonClicked(true)
-          }} className=' sm:w-[60%] bg-button py-4 mt-4 px-10 sm:px-2 text-xl sm:text-lg text-white italic rounded-lg z-10'>Existing Records</Link>
+          }} className=' sm:w-[60%] bg-button hover:bg-purple-950 hover:border-2 hover:border-button py-4 mt-4 px-10 sm:px-2 text-xl sm:text-lg text-white italic rounded-lg z-10'>Existing Records</Link>
         </div>
       </div>
     </div>

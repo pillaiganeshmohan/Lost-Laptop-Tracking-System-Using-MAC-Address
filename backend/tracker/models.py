@@ -32,7 +32,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     police_id = models.CharField(max_length=100, unique=True)
     aadhaar_no = models.CharField(max_length=100)
     contact_no = models.IntegerField(default=0)
-    address = models.CharField(max_length=100, null=True)
     full_name = models.CharField(max_length=100)
     is_staff = models.BooleanField(default=False)
 
@@ -44,6 +43,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
 
     objects = UserManager()
+
+class PcapFile(models.Model):
+    filename = models.CharField(max_length=255)
+    file = models.FileField(upload_to='pcap_files/')  # Path where the file is stored
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
 
     
 class UserProfile(models.Model):

@@ -41,10 +41,13 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         # Include full_name in the response
         full_name = user.full_name if hasattr(user, 'full_name') else None
+        is_admin = user.is_superuser if hasattr(user, 'is_superuser') else None
+
 
         return {
             'email': email,
             'full_name': full_name,
+            'is_admin': is_admin,
             'access_token': str(refresh.access_token),
             'refresh_token': str(refresh)
         }
@@ -60,7 +63,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'full_name', 'email', 'police_id', 'aadhaar_no', 'contact_no', 'address', 'user_profile')
+        fields = ('id', 'full_name', 'email', 'police_id', 'aadhaar_no', 'contact_no', 'user_profile','is_superuser')
 
 
 class UserCreateSerializer(serializers.ModelSerializer):

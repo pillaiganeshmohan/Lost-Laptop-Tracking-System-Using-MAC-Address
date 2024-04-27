@@ -1,7 +1,6 @@
 from django.contrib import admin
 from .models import *
 
-
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = ('email', 'police_id')
@@ -37,3 +36,4 @@ class StolenLaptopDetailsAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         """ You can also override this method to implement custom save behavior. """
         super().save_model(request, obj, form, change)
+

@@ -10,6 +10,9 @@ import React from "react";
 import ContactUs from "./pages/ContactUs";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import UserApproval from './pages/admin/UserApproval'
+import AdminFile from './pages/admin/AdminFile'
+import AdmminQueries from './pages/admin/AdminQueries'
 
 
 function App() {
@@ -33,6 +36,10 @@ function App() {
           <Route path="/details/:id" element={<Layout><DetailedView/></Layout>} />
           <Route path="/login-signup" element={<Slider />} />
           <Route path="/contact" element={<Layout><ContactUs /></Layout>} />
+          <Route path='/admin-user-approval' element={<UserApproval/>}/>
+          <Route path='/admin' element={<AdminFile/>}/>
+          <Route path='/admin-queries' element={<AdmminQueries/>}/>
+
 
         </Routes>
       </div>

@@ -105,7 +105,7 @@ const SlidingSignUpForm = () => {
   return (
     <div className="flex flex-col mt-2">
       <h1 className="flex text-2xl font-semibold mb-4 text-gray-700 justify-center sm:text-center sm:-ml-10">New to the System, <br/> Sign Up Now</h1>
-      <form className="flex flex-col w-full max-w-md justify-left items-left -ml-16 sm:-ml-12">
+      <form className="form flex flex-col w-full max-w-md justify-left items-left -ml-16 sm:-ml-12">
         <div className="flex flex-col mb-4 w-full">
           <label htmlFor="fullName" className="mb-1 text-left text-sm text-gray-500 font-semibold">Full Name</label>
           <input type="text" name="full_name" value={formData.full_name} onChange={handleInputChange} className="w-80 text-xs outline-none sm:w-[70vw]" placeholder="Enter Your Name" required/>

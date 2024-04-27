@@ -7,6 +7,7 @@ import { IoClose } from "react-icons/io5";
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [fullName, setFullName] = useState('');
   const navigate = useNavigate()
 
@@ -18,6 +19,8 @@ function Navbar() {
     if (userLoggedIn) {
       const userData = JSON.parse(localStorage.getItem('userData'));
       setFullName(userData.full_name);
+      setIsAdmin(userData.is_admin);
+      console.log(isAdmin)
     }
   }, []);
 
@@ -38,13 +41,18 @@ function Navbar() {
       <div className='w-1/6 flex items-center sm:justify-center'>
        <Link to='/'> <img className='w-20 h-12 ml-12 sm:ml-6 flex' src={logo} alt="Logo"/></Link>
       </div>
-      <div className='w-3/6 items-center justify-end gap-12 sm:hidden flex'>
+      <div className='w-3/6 items-center justify-center gap-[5%] sm:hidden flex'>
         {/* Desktop menu links */}
         <Link className='text-white text-lg hover:no-underline relative inline cursor-pointer before:bg-button before:absolute before:-bottom-1 before:block before:h-[2px] before:w-full before:origin-bottom-right before:scale-x-0 before:transition before:duration-300 before:ease-in-out hover:before:origin-bottom-left hover:before:scale-x-100' to='/#home'>Home</Link>
         <Link className='text-white text-lg hover:no-underline relative inline cursor-pointer before:bg-button before:absolute before:-bottom-1 before:block before:h-[2px] before:w-full before:origin-bottom-right before:scale-x-0 before:transition before:duration-300 before:ease-in-out hover:before:origin-bottom-left hover:before:scale-x-100' to='/#walkthrough'>Walkthrough</Link>
         <Link className='text-white text-lg hover:no-underline relative inline cursor-pointer before:bg-button before:absolute before:-bottom-1 before:block before:h-[2px] before:w-full before:origin-bottom-right before:scale-x-0 before:transition before:duration-300 before:ease-in-out hover:before:origin-bottom-left hover:before:scale-x-100' to='/#about'>About Us</Link>
+        {!isAdmin && 
         <Link className='text-white text-lg hover:no-underline relative inline cursor-pointer before:bg-button before:absolute before:-bottom-1 before:block before:h-[2px] before:w-full before:origin-bottom-right before:scale-x-0 before:transition before:duration-300 before:ease-in-out hover:before:origin-bottom-left hover:before:scale-x-100' to='/contact/#1'>Contact Us</Link>
-      </div>
+        }
+        {isAdmin && 
+        <Link className='text-white text-lg hover:no-underline relative inline cursor-pointer before:bg-button before:absolute before:-bottom-1 before:block before:h-[2px] before:w-full before:origin-bottom-right before:scale-x-0 before:transition before:duration-300 before:ease-in-out hover:before:origin-bottom-left hover:before:scale-x-100' to='/admin'>Admin Panel</Link>
+        }
+        </div>
       <div className='w-1/6 sm:flex items-center sm:justify-center justify-end hidden'>
         {/* Mobile menu toggle button */}
         <button className="text-white text-lg" onClick={toggleMobileMenu}>
@@ -57,7 +65,12 @@ function Navbar() {
           <Link className='text-white text-lg mb-4'  to='/#home' onClick={toggleMobileMenu}>Home</Link>
           <Link className='text-white text-lg mb-4' to='/#walkthrough' onClick={toggleMobileMenu}>Walkthrough</Link>
           <Link className='text-white text-lg mb-4' to='/#about' onClick={toggleMobileMenu}>About Us</Link>
+          {!isAdmin && 
           <Link className='text-white text-lg mb-4' to='/contact/#1' onClick={toggleMobileMenu}>Contact Us</Link>
+          }
+          {isAdmin &&
+          <Link className='text-white text-lg mb-4' to='/admin' onClick={toggleMobileMenu}>Admin Panel</Link>
+          }
           {!isLoggedIn && (
           <>
             <Link className='text-white text-lg mb-4' to='/login-signup' state={{ showSignUp: true }}>Login</Link>

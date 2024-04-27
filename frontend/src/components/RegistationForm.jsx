@@ -26,6 +26,7 @@ function RegistationForm({myClass}) {
   const [userId, setUserId] = useState('')
   const [aadhaarError, setAadhaarError] = useState('');
   const [contactError, setContactError] = useState('');
+  const [brandError, setBrandError] = useState('')
   const [macAddressError, setMacAddressError] = useState('');
   const [dateError, setDateError] = useState('')
   const [fullNameError, setFullNameError] = useState('')
@@ -61,45 +62,44 @@ function RegistationForm({myClass}) {
       ...formData,
       [name]: value
     });
-
-    
-
-    if (name === 'aadhaar_no') { 
-      if (!/^\d{12}$/.test(value)) {
-        setAadhaarError('*Aadhaar must be 12 digits');
-        console.log(aadhaarError)
-      } else {
-        setAadhaarError('');
-      }
-    }
-
-    if (name === 'contact_no') { 
-      if (!/^\d{10}$/.test(value)) {
-        setContactError('*Contact must be 10 digits');
-      } else {
-        setContactError('');
-      }
-    }
-
-    if (name === 'mac_address') { 
-      if (!/^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})|([0-9a-fA-F]{4}\\.[0-9a-fA-F]{4}\\.[0-9a-fA-F]{4})$/.test(value)) {
-        setMacAddressError('Mac Address must be 17 digits')
-      }
-      else{
-        setMacAddressError('')
-      }
-
-
-    }
-    if (name === 'date') { 
-      if (!/^\d{4}-\d{2}-\d{2}/.test(formData.date.trim())) {
-        setDateError('Date must be in YYYY-MM-DD format');
-    }
-      else{
-        setDateError('')
-      }
+  
+    // Validate each field based on its name
+    switch (name) {
+      case 'full_name':
+        setFullNameError(value.trim() ? '' : 'Full Name is required');
+        break;
+      case 'aadhaar_no':
+        setAadhaarError(/^\d{12}$/.test(value) ? '' : 'Aadhaar must be 12 digits');
+        break;
+      case 'approximate_time':
+        setApproximateTimeError(/^([01]\d|2[0-3]):([0-5]\d)$/.test(value) ? '' : 'Time must be in 24Hrs HH:MM format ');
+        break;
+      case 'date':
+        setDateError(/^\d{4}-\d{2}-\d{2}$/.test(value) ? '' : 'Date must be in YYYY-MM-DD format');
+        break;
+      case 'address':
+        setAddressError(value.trim() ? '' : 'Address is required');
+        break;
+      case 'brand':
+        setBrandError(value.trim() ? '' : 'Brand is required');
+      break;
+      case 'contact_no':
+        setContactError(/^\d{10}$/.test(value) ? '' : 'Contact must be 10 digits');
+        break;
+      case 'description':
+        setDescriptionError(value.trim() ? '' : 'Description is required');
+        break;
+      case 'model_no':
+        setModelError(value.trim() ? '' : 'Model No is required');
+        break;
+      case 'mac_address':
+        setMacAddressError(/^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})|([0-9a-fA-F]{4}\\.[0-9a-fA-F]{4}\\.[0-9a-fA-F]{4})$/.test(value) ? '' : 'MAC Address must be valid');
+        break;
+      default:
+        break;
     }
   };
+  
 
   
 
@@ -180,6 +180,8 @@ function RegistationForm({myClass}) {
       setDescriptionError(emptyFieldErrors.description || '' );
       setModelError(emptyFieldErrors.model_no || '' );
       setMacAddressError(emptyFieldErrors.mac_address || '' );
+      setBrandError(emptyFieldErrors.brand || '' );
+
 
       return;
     }
@@ -214,18 +216,16 @@ function RegistationForm({myClass}) {
   };
   
   return (
-    <div className={`${myClass} w-full flex items-center justify-center flex-col sm:justify-between sm:gap-4 bg-black`}>
+    <div id='registration' className={`${myClass} w-full flex items-center justify-center flex-col sm:justify-between sm:gap-4 bg-black`}>
          
-         {
-            isLoading && <Loader label='Searching . . . '/>
-          }
+         
         {!isLoading && <> <img src={gradientLeft} className='absolute top-[160%] sm:w-1/2 sm:h-1/2 left-0 sm:top-[120%]'/>
         <img src={gradientRight} className='absolute top-[100%] sm:top-[70%] sm:w-1/2 sm:h-1/2 right-0'/>
          <img src={gradientRight} className='absolute top-[200%] right-0 sm:hidden'/></>}
          
          
 
-            <form className='w-3/5 sm:w-full bg-black flex flex-col items-center justify-center' onSubmit={handleSubmit}>
+            <form className='w-3/5 sm:w-11/12 bg-black flex flex-col items-center justify-center' onSubmit={handleSubmit}>
             <h1 className='z-20 my-14 text-5xl sm:text-3xl text-center font-semibold text-white'>
          Registration Form</h1>
          <label className='w-full flex justify-between'>
@@ -269,7 +269,11 @@ function RegistationForm({myClass}) {
          placeholder='Enter Time'
        />
        
-
+       {isLoading && 
+          <div className='w-full flex items-center justify-center'>
+            isLoading && <Loader label='Searching . . . '/>
+           </div> 
+          }
            
            <label className='w-full flex justify-between'>
            <label className='text-white text-left text-xl font-bold'>Date</label> 
@@ -315,13 +319,16 @@ function RegistationForm({myClass}) {
          className='bg-black w-full py-2 mb-4 text-white border-b-2 border-white  focus:outline-none'
          placeholder='Enter Mobile No'/>
            
-           <label className='text-white w-full  text-left text-xl font-bold'>Brand</label> 
+           <label className='w-full flex justify-between'>
+           <label className='text-white text-left text-xl font-bold'>Brand</label> 
+           {brandError && <span className='text-red-500'>{brandError}</span>}
+           </label>           
            <select
          className='bg-black py-2 mb-4 w-full sm:w-full z-20  text-white border-b-2 border-white focus:outline-none'
          id="laptopBrands"
          name="brand"
          value={formData.brand}
-         onChange={handleBrandChange}
+         onChange={handleInputChange}
        >        
                <option value="" className='w-1/2 text-md'>Select a brand</option>
                <option value="Apple" className='w-1/2 text-md'>Apple</option>
@@ -347,7 +354,7 @@ function RegistationForm({myClass}) {
          value={formData.description}
          onChange={handleInputChange}
          className='bg-black w-full py-2 mb-4 text-white border-b-2 border-white  focus:outline-none'
-         placeholder='Enter Descrition'
+         placeholder='Enter Description'
        />
            
            <label className='w-full flex justify-between'>
@@ -376,10 +383,10 @@ function RegistationForm({myClass}) {
          className='bg-black w-full py-2 mb-4 text-white border-b-2 border-white  focus:outline-none'
         placeholder='Enter  MAC Address'/>
          { !isRegistered &&
-           <button className='w-1/4 sm:w-1/2 bg-button py-4 my-8 px-10 text-xl text-white italic rounded-lg z-10' type='submit'>Submit</button>
+           <button className='w-1/4 sm:w-1/2 bg-button py-4 my-8 px-10 text-xl hover:bg-purple-950 hover:border-2 hover:border-button text-white italic rounded-lg z-10' type='submit'>Submit</button>
          }
          { isRegistered &&
-           <button onClick={handleSearch} className='w-1/4 sm:w-1/2 bg-button py-4 my-8 px-6 text-xl text-white italic rounded-lg z-10'>Search Now</button>
+           <button onClick={handleSearch} className='w-1/4 sm:w-1/2 bg-button hover:bg-purple-950 hover:border-2 hover:border-button py-4 my-8 px-6 text-xl text-white italic rounded-lg z-10'>Search Now</button>
          }
    
          </form>

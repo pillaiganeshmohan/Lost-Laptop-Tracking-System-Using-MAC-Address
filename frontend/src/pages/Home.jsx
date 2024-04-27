@@ -86,10 +86,10 @@ function Home() {
     </div>
 
     </div>
-    <div id='about' className='w-full flex items-center h-[140vh] sm:h-[70vh] bg-black'>
+    <div  className='w-full flex items-center h-[140vh] sm:h-[70vh] bg-black'>
     <img src={gradientLeft} className='absolute'/>
-    <div className='flex w-full flex-col items-center '>
-    <h1 className='my-12 text-5xl text-center font-semibold text-white'>
+    <div id='about' className='flex w-full flex-col items-center '>
+    <h1 className='mb-2 mt-12 text-5xl text-center font-semibold text-white'>
     About Us
     </h1>
     <div className='hidden w-full items-center justify-center my-20 gap-16'>
@@ -135,11 +135,11 @@ function Home() {
 
     <Carousal 
     names={['Ganesh Mohan Pillai', 'Jannat Shaikh', 'Priyanshi Sharma', 'Tejas Patil']}  
-    emails={['pillaiganeshmohanwork@gmail.com', 'jannatiqbalsk@gmail.com', 'priyanshi@gmail.com', 'tejaspatil@gmail.com']} 
-    linkedIn={['https://www.linkedin.com/in/ganeshmohanpillai','https://www.linkedin.com/in/jannat-shaikh','','']}
-    twitter={['https://twitter.com/ganeshmohan1210','https://twitter.com/jannatsk44','','']}
-    mail={['mailto:pillaiganeshmohanwork@gmail.com','mailto:jannatiqbalsk@gmail.com','','']}
-    instagram={['https://www.instagram.com/_i__am_lucifer','https://www.instagram.com/jannatsk44','','']}
+    emails={['Cybersecurity Professional | Front-end Developer | UI/UX Designer', 'Full-Stack Developer | Programmer | Aspiring Cybersecurity Professional', 'Cyber Security Enthusiast | Full Stack web developer', 'Cyber Security Enthusiast | Competitive Programmer']} 
+    linkedIn={['https://www.linkedin.com/in/ganeshmohanpillai','https://www.linkedin.com/in/jannat-shaikh','https://www.linkedin.com/in/priyanshisharma1','https://www.linkedin.com/in/tejasspatil']}
+    twitter={['https://twitter.com/ganeshmohan1210','https://twitter.com/jannatsk44','https://twitter.com/PriyanshiS56438','https://twitter.com/TejasPa11768552']}
+    mail={['mailto:pillaiganeshmohanwork@gmail.com','mailto:jannatiqbalsk@gmail.com','mailto:priyanshisharma2024@gmail.com','mailto:tejass.patil.2911@gmail.com']}
+    instagram={['https://www.instagram.com/_i__am_lucifer','https://www.instagram.com/jannatsk44','https://www.instagram.com/priyanshisharma292','https://www.instagram.com/patil_tejas29']}
 />
 
 

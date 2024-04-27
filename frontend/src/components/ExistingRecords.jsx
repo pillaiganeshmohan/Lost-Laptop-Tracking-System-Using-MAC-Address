@@ -56,7 +56,7 @@ function ExistingRecords({ myClass }) {
   };
 
   return (
-    <div className={`${myClass} w-full flex flex-col py-20 sm:py-2 items-center justify-center bg-black font-sans`}>
+    <div id='records' className={`${myClass} w-full flex flex-col py-20 sm:py-2 items-center justify-center bg-black font-sans`}>
       <div className='w-[90%] flex sm:flex-col items-center my-12 sm:my-0 justify-between'>
         <h1 className='z-20 my-6 text-5xl sm:text-3xl text-center font-semibold sm:w-full text-white'>
           Existing Records
@@ -116,7 +116,7 @@ function ExistingRecords({ myClass }) {
         </tbody>
       </table>
       
-      {filteredRecords.map((record, index) => (
+      {currentRecords.map((record, index) => (
        <> 
       <div key={index} className='w-11/12 flex-col hidden sm:flex'>
       
