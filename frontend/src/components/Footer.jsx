@@ -34,15 +34,15 @@ function Footer() {
             <label className='w-1/2 sm:w-full sm:flex-col sm:justify-center sm:items-center flex flex-col ml-10 sm:ml-0 sm:gap-0 items-start gap-3 '>
   
                    
-                <p className='flex items-center mr-3 whitespace-nowrap'> xyz@gmail.com</p>   
-                 <p className='flex items-center mr-2 whitespace-nowrap'> +91 9876543211</p>   
+                <p className='flex items-center mr-3 whitespace-nowrap'> pillaiganeshmohan@gmail.com</p>   
+                 <p className='flex items-center mr-2 whitespace-nowrap'> +91 9136247119</p>   
             </label>
 
         </div>
     </div>
 
     </div>
-    <p className='text-white text-sm p-4'>Copyright 2024   |   ©  All rights reserved. </p>   
+    <p className='text-white text-sm p-4'>Copyright © 2024 Lost Laptop Tracking System Using MAC Address | All rights reserved</p>   
     </div>
   )
 }

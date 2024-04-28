@@ -79,7 +79,7 @@ function Home() {
     </h1>
     <div className='flex flex-col h-5/6 w-full gap-6 items-center'>
       <div className='w-10/12 h-full bg-gray-500'>
-        <iframe src="https://www.youtube.com/embed/ht5VrWvmHEM?si=1k17wMhxvxZxRf3g" className='w-full h-full shadow-myshadow shadow-button' frameborder="0"></iframe>
+        <iframe src="https://www.youtube.com/embed/ek2cjYcEU-A?si=buV3yudKWfc2e_xq" className='w-full h-full shadow-myshadow shadow-button' frameborder="0"></iframe>
       </div>
 
     </div>
