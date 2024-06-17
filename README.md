@@ -12,7 +12,7 @@ A laptop tracking system using MAC address is a solution designed to help track 
 ***Watch Demo Video👇***  
 ### [Lost Laptop Tracking System Using MAC Address](https://youtu.be/ek2cjYcEU-A?si=CdM4ev36mEkvhTky)
 
-# Run Frontend
+## Run Frontend
 
 ### `cd frontend`
 
@@ -20,11 +20,10 @@ A laptop tracking system using MAC address is a solution designed to help track 
 
 ### `npm start`
 
-## Frontend will be hosted on below link
+Frontend will be hosted on below link  
+http://localhost:3000/
 
-### `http://localhost:3000/`
-
-# Run Backend
+## Run Backend
 
 ### `cd backend`
 
@@ -42,9 +41,9 @@ A laptop tracking system using MAC address is a solution designed to help track 
 
 ### `python manage.py runserver`
 
-## Backend will be hosted on below link
+Backend will be hosted on below link  
 
-### `http://127.0.0.1:8000/`
+http://127.0.0.1:8000/
 
 ## Screenshots
 
@@ -81,3 +80,9 @@ A laptop tracking system using MAC address is a solution designed to help track 
 ![16](https://github.com/pillaiganeshmohan/Lost-Laptop-Tracking-System-Using-MAC-Address/assets/68379838/e62a2409-0cbd-4e18-9b73-158aeb7730d8)
 
 ![17](https://github.com/pillaiganeshmohan/Lost-Laptop-Tracking-System-Using-MAC-Address/assets/68379838/f0484e46-73c4-4a62-a34c-3f664c06ceaa)
+
+## Contributing
+If you would like to contribute to this project, please fork the repository and submit a pull request.
+
+## License
+This project is licensed under the **GNU General Public v3.0 License**. See the [LICENSE](./LICENSE) file for details.
